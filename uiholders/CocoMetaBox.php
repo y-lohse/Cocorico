@@ -6,11 +6,15 @@ class CocoMetaBox extends CocoAbstractUIHolder{
 		
 		foreach ($this->forms as $form){
 			CocoFormTableRowUI::start();
+			
+			CocoFormTableHeaderUI::start();
+			$form->label();
+			CocoFormTableHeaderUI::end();
+			
 			CocoFormTableCellUI::start();
-			
 			$form->render();
-			
 			CocoFormTableCellUI::end();
+			
 			CocoFormTableRowUI::end();
 		}
 		
