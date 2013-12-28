@@ -1,6 +1,10 @@
 <?php
 class CocoMetaBox extends CocoAbstractUIHolder{
 
+	public function __construct(){
+		$this->store = new CocoMetaStore();
+	}
+
 	public function render(){
 		CocoFormTableUI::start();
 		
