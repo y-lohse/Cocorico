@@ -13,4 +13,10 @@ abstract class CocoAbstractUIHolder{
 		}
 	}
 	
+	public function save(){
+		foreach ($this->forms as $form){
+			$form->save(CocoSecure::$post);
+		}
+	}
+	
 }

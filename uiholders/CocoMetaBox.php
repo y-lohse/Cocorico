@@ -1,4 +1,5 @@
 <?php
+
 class CocoMetaBox extends CocoAbstractUIHolder{
 
 	public function __construct(){
@@ -6,6 +7,8 @@ class CocoMetaBox extends CocoAbstractUIHolder{
 	}
 
 	public function render(){
+		$this->save();
+		
 		CocoFormTableUI::start();
 		
 		foreach ($this->forms as $form){
