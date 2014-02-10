@@ -10,7 +10,9 @@ class CocoStore{
 		$ser = serialize(array($name));
 		update_option('cocostore_names', $ser);
 		
+		var_dump(CocoStore::$restored);
 		if (isset(CocoStore::$restored[$name])) return CocoStore::$restored[$name];
+		else if (isset($_POST[$name])) return $_POST[$name];
 		else return '';
 	}
 	
