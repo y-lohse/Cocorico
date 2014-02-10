@@ -2,9 +2,8 @@
 class CocoSaveFilter{
 	
 	public static function apply($data, $params){
-		if (isset($_POST) && isset($_POST[$data])){
-			echo 'saving data '.$data;
-		}
+		$result = CocoStore::request($data);
+		update_option($params['name'], $result);
 	}
 	
 }

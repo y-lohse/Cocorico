@@ -11,7 +11,7 @@ class CocoStore{
 		update_option('cocostore_names', $ser);
 		
 		if (isset(CocoStore::$restored[$name])) return CocoStore::$restored[$name];
-		else return 'unknown';
+		else return '';
 	}
 	
 	public function prepareBackup(){
