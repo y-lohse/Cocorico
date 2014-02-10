@@ -1,5 +1,12 @@
 <?php
 
+require_once 'core/CocoUI.php';
+require_once 'core/CocoForm.php';
+
+require_once 'forms/CocoTextForm.php';
+
+require_once 'filters/CocoSaveFilter.php';
+
 //require_once 'core/CocoAbstractUIHolder.php';
 //require_once 'core/CocoAbstractForm.php';
 //require_once 'core/CocoAbstractUI.php';
