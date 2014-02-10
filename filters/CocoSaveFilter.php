@@ -1,8 +1,10 @@
 <?php
 class CocoSaveFilter{
 	
-	public function filter($data, $params){
-		echo 'saving data';
+	public static function apply($data, $params){
+		if (isset($_POST) && isset($_POST[$data])){
+			echo 'saving data '.$data;
+		}
 	}
 	
 }

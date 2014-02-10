@@ -1,5 +1,6 @@
 <?php
 
+require_once 'core/CocoStore.php';
 require_once 'core/CocoUI.php';
 require_once 'core/CocoForm.php';
 
