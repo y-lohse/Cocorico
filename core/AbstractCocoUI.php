@@ -27,9 +27,8 @@ abstract class AbstractCocoUI{
 		
 		//run through the filters
 		if ($this->value !== false){//prevents the remaining filters to run, either if no value was found or purposely by a filter
-			if (class_exists($filter)){
-				$this->value = $filter::apply($this->value, $params);
-			}
+			if (!class_exists($filter)) $filter = CocoDictionary::translate($filter, 'filter');
+			$this->value = $filter::apply($this->value, $params);
 		}
 		
 		return $this;
