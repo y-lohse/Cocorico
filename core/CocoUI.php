@@ -1,21 +1,23 @@
 <?php
 class CocoUI{
 	
+	protected $forms = array();
+	
 	public function __construct(){
 	}
 	
 	public function field($form, $params){
 		if (class_exists($form)){
-			echo $form::render($params);
+			$form = new $form();
+			array_push($this->forms, array($form, $params));
+//			echo $form->render($params);
+			return $form;
 		}
-		
-		//could return an instance of cocoform, and that woudl then have the filter method
-		return $this;
 	}
 	
-	public function filter($filter, $data, $params){
-		if (class_exists($filter)){
-			$filter::apply($data, $params);
+	public function render(){
+		foreach ($this->forms as $form){
+			echo $form[0]->render($form[1]);
 		}
 	}
 	
