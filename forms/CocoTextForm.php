@@ -1,8 +1,9 @@
 <?php
-class CocoTextForm implements CocoForm{
+class CocoTextForm extends CocoForm{
 	
-	public static function render($params){
-		$output = '<input type="text" name="'.$params['name'].'" value="'.$params['value'].'" />';
+	public function render($params){
+		$value = get_option($params['name']);
+		$output = '<input type="text" name="'.$params['name'].'" value="'.$value.'" />';
 		return $output;
 	}
 	
