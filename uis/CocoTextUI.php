@@ -1,8 +1,11 @@
 <?php
 class CocoTextUI extends AbstractCocoUI{
 	
+	//saved is the key to a wordpress option containing the value
+	//value is the direct value to output
 	public function render($params){
-		$value = get_option($this->name);
+		$option_key = (isset($params['saved'])) ? $params['saved'] : $this->name;
+		$value = (isset($params['value'])) ? $params['value'] : get_option($option_key);
 		$output = '<input type="text" name="'.$this->name.'" value="'.$value.'" />';
 		return $output;
 	}

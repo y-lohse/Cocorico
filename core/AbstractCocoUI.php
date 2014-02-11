@@ -21,7 +21,9 @@ abstract class AbstractCocoUI{
 	
 	public function filter($filter, $params=array()){
 		//on first run, load the posted value
-		if ($this->value === null) $this->value = CocoStore::request($this->name);
+		if ($this->value === null){
+			$this->value = CocoStore::request($this->name);
+		}
 		
 		//run through the filters
 		if ($this->value !== false){//prevents the remaining filters to run, either if no value was found or purposely by a filter
