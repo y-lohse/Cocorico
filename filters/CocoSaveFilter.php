@@ -1,5 +1,5 @@
 <?php
-class CocoSaveFilter{
+class CocoSaveFilter extends AbstractCocoFilter{
 	
 	public static function apply($name, $params){
 		$result = CocoStore::request($name);
