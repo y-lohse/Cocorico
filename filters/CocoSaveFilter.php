@@ -7,3 +7,4 @@ class CocoSaveFilter extends AbstractCocoFilter{
 	}
 	
 }
+CocoDictionary::register('save', 'CocoSaveFilter');

@@ -9,3 +9,4 @@ class CocoNonceFilter extends AbstractCocoFilter{
 	}
 	
 }
+CocoDictionary::register('nonce', 'CocoNonceFilter');
