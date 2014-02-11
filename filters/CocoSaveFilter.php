@@ -1,9 +1,9 @@
 <?php
 class CocoSaveFilter{
 	
-	public static function apply($data, $params){
-		$result = CocoStore::request($data);
-		if ($result) update_option($params['name'], $result);
+	public static function apply($name, $params){
+		$result = CocoStore::request($name);
+		if ($result) update_option($name, $result);
 	}
 	
 }

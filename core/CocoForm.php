@@ -1,10 +1,17 @@
 <?php
 abstract class CocoForm{
+	
 	abstract public function render($params);
 	
-	public function filter($filter, $data, $params){
+	protected $name;
+	
+	public function __construct($name){
+		$this->name = $name;
+	}
+	
+	public function filter($filter, $params=array()){
 		if (class_exists($filter)){
-			$filter::apply($data, $params);
+			$filter::apply($this->name, $params);
 		}
 	}
 }

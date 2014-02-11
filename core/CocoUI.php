@@ -6,11 +6,10 @@ class CocoUI{
 	public function __construct(){
 	}
 	
-	public function field($form, $params){
+	public function field($form, $name, $params=array()){
 		if (class_exists($form)){
-			$form = new $form();
+			$form = new $form($name);
 			array_push($this->forms, array($form, $params));
-//			echo $form->render($params);
 			return $form;
 		}
 	}
