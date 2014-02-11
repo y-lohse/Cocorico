@@ -1,13 +1,10 @@
 <?php
 
-require_once 'core/CocoStore.php';
-require_once 'core/Cocorico.php';
-require_once 'core/AbstractCocoUI.php';
-require_once 'core/AbstractCocoFilter.php';
+$cocoPath = dirname(__FILE__);
 
-require_once 'uis/CocoNonceUI.php';
-require_once 'uis/CocoTextUI.php';
-require_once 'uis/CocoRadioUI.php';
-
-require_once 'filters/CocoSaveFilter.php';
-require_once 'filters/CocoNonceFilter.php';
+//autoload everything
+foreach (array('core', 'uis', 'filters') as $dir){
+	foreach (glob($cocoPath.'/'.$dir.'/*.php') as $file){
+		require_once $file;
+	}
+}
