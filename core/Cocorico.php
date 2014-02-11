@@ -1,5 +1,5 @@
 <?php
-class CocoUI{
+class Cocorico{
 	
 	protected $forms = array();
 	
