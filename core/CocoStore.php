@@ -5,15 +5,17 @@ class CocoStore{
 	private static $restored = array();
 	
 	public static function request($name){
-		array_push(CocoStore::$requests, $name);
-		
 		$ser = serialize(array($name));
 		update_option('cocostore_names', $ser);
 		
-		var_dump(CocoStore::$restored);
-		if (isset(CocoStore::$restored[$name])) return CocoStore::$restored[$name];
-		else if (isset($_POST[$name])) return $_POST[$name];
-		else return '';
+
+		if (isset(CocoStore::$restored[$name])){
+			return CocoStore::$restored[$name];
+		}
+		else{
+			array_push(CocoStore::$requests, $name);
+			return '';
+		}
 	}
 	
 	public function prepareBackup(){
@@ -33,7 +35,7 @@ class CocoStore{
 	}
 	
 	public function restore(){
-		CocoStore::$restored = unserialize(get_option('cocostore_values'));
+		CocoStore::$restored = array_merge(unserialize(get_option('cocostore_values')), $_POST);
 	}
 	
 }
