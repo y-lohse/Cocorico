@@ -14,7 +14,7 @@ class CocoStore{
 		}
 		else{
 			array_push(CocoStore::$requests, $name);
-			return '';
+			return false;
 		}
 	}
 	
@@ -36,6 +36,7 @@ class CocoStore{
 	
 	public function restore(){
 		CocoStore::$restored = array_merge(unserialize(get_option('cocostore_values')), $_POST);
+		update_option('cocostore_values', serialize(array()));//clears the cache
 	}
 	
 }
