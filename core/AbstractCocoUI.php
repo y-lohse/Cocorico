@@ -1,5 +1,5 @@
 <?php
-abstract class CocoUI{
+abstract class AbstractCocoUI{
 	
 	abstract public function render($params);
 	

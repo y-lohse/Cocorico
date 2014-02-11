@@ -1,5 +1,5 @@
 <?php
-class CocoTextUI extends CocoUI{
+class CocoTextUI extends AbstractCocoUI{
 	
 	public function render($params){
 		$value = get_option($this->name);
