@@ -12,7 +12,7 @@ class Cocorico{
 	
 	public function field($ui, $name, $params=array()){
 		if (class_exists($ui)) $class = $ui;
-		else $class = CocoDictionary::translate($ui);
+		else $class = CocoDictionary::translate($ui, 'ui');
 			
 		$instance = new $class($name);
 		if (!$this->validated) $instance->preventFilters();
