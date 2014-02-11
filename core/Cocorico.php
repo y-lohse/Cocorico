@@ -1,7 +1,7 @@
 <?php
 class Cocorico{
 	
-	protected $forms = array();
+	protected $uis = array();
 	protected $validated = true;//default to true so that the nonce filter runs
 	
 	public function __construct(){
@@ -10,18 +10,19 @@ class Cocorico{
 		$this->validated = (bool)$nonce->getValue();
 	}
 	
-	public function field($form, $name, $params=array()){
-		if (class_exists($form)){
-			$form = new $form($name);
-			if (!$this->validated) $form->preventFilters();
-			array_push($this->forms, array($form, $params));
-			return $form;
-		}
+	public function field($ui, $name, $params=array()){
+		if (class_exists($ui)) $class = $ui;
+		else $class = CocoDictionary::translate($ui);
+			
+		$instance = new $class($name);
+		if (!$this->validated) $instance->preventFilters();
+		array_push($this->uis, array($instance, $params));
+		return $instance;
 	}
 	
 	public function render(){
-		foreach ($this->forms as $form){
-			echo $form[0]->render($form[1]);
+		foreach ($this->uis as $ui){
+			echo $ui[0]->render($ui[1]);
 		}
 	}
 	

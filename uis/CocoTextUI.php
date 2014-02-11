@@ -11,3 +11,4 @@ class CocoTextUI extends AbstractCocoUI{
 	}
 	
 }
+CocoDictionary::register('text', 'CocoTextUI');
