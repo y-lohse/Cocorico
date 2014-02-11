@@ -8,6 +8,7 @@ abstract class AbstractCocoUI{
 	
 	public function __construct($name){
 		$this->name = $name;
+		CocoStore::request($this->name);
 	}
 	
 	public function getValue(){
