@@ -11,8 +11,9 @@ class CocoUI{
 		$this->renderFn = $fn;
 	}
 	
-	public function render($params){
-		return call_user_func($this->renderFn, $this->name, $params);
+	public function render($args){
+		array_unshift($args, $this->name);
+		return call_user_func_array($this->renderFn, $args);
 	}
 	
 	public function getValue(){

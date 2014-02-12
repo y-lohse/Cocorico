@@ -17,15 +17,17 @@ class Cocorico{
 		$this->validated = (bool)$nonce->getValue();
 	}
 	
-	public function field($ui, $name, $params=array()){
-		$fn = CocoDictionary::translate($ui, 'ui');
+	public function field($alias, $name){
+		$fn = CocoDictionary::translate($alias, 'ui');
 		
 		$instance = new CocoUI($name, $fn);
 		if (!$this->validated) $instance->preventFilters();
 		
+		$args = array_slice(func_get_args(), 2);
+		
 		array_push($this->stack, array( 'action'=>'render',
 										'instance'=>$instance, 
-										'params'=>$params));
+										'args'=>$args));
 		
 		return $instance;
 	}
@@ -44,7 +46,7 @@ class Cocorico{
 		
 		foreach ($this->stack as $action){
 			if ($action['action'] === 'render'){
-				echo $action['instance']->render($action['params']);
+				echo $action['instance']->render($action['args']);
 			}
 			else if ($action['action'] === 'startBuffer'){
 				ob_start();
