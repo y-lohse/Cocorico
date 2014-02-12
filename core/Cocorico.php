@@ -3,8 +3,15 @@ class Cocorico{
 	
 	protected $stack = array();
 	protected $validated = true;//default to true so that the nonce filter runs
+	protected $autoForm;
 	
-	public function __construct(){
+	public function __construct($autoForm=true, $autoNonce=true){
+		$this->autoForm = $autoForm;
+		if ($this->autoForm) $this->startWrapper('form');
+		if ($autoNonce) $this->nonce();
+	}
+	
+	public function nonce(){
 		$nonce_action = 'cocorico_nonce_validation';
 		$nonce = $this->field('nonce', 'coco_nonce', array('action'=>$nonce_action))->filter('nonce', array('action'=>$nonce_action));
 		$this->validated = (bool)$nonce->getValue();
@@ -33,6 +40,8 @@ class Cocorico{
 	}
 	
 	public function render(){
+		if ($this->autoForm) $this->endWrapper('form');
+		
 		foreach ($this->stack as $action){
 			if ($action['action'] === 'render'){
 				echo $action['instance']->render($action['params']);

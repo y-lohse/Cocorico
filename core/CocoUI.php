@@ -33,9 +33,6 @@ class CocoUI{
 		if ($this->value !== false){//prevents the remaining filters to run, either if no value was found or purposely by a filter
 			$filterFn = CocoDictionary::translate($filter, 'filter');
 			$this->value = call_user_func($filterFn, $this->value, $params);
-			
-//			if (!class_exists($filter)) $filter = CocoDictionary::translate($filter, 'filter');
-//			$this->value = $filter::apply($this->value, $params);
 		}
 		
 		return $this;
