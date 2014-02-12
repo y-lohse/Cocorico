@@ -19,4 +19,4 @@ class CocoRadioUI extends AbstractCocoUI{
 	}
 	
 }
-CocoDictionary::register('radio', 'CocoRadioUI');
+//CocoDictionary::register('radio', 'CocoRadioUI');

@@ -1,14 +1,20 @@
 <?php
-abstract class AbstractCocoUI{
+class AbstractCocoUI{
 	
-	abstract public function render($params);
+//	abstract public function render($params);
 	
-	protected $name;
+	protected $renderFn;
+	protected $name;//html sense of name
 	protected $value = null;
 	
-	public function __construct($name){
+	public function __construct($name, $fn){
 		$this->name = $name;
 		CocoStore::request($this->name);
+		$this->renderFn = $fn;
+	}
+	
+	public function render($params){
+		return call_user_func($this->renderFn, $this->name, $params);
 	}
 	
 	public function getValue(){

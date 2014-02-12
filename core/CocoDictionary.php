@@ -4,12 +4,16 @@ class CocoDictionary{
 	protected static $uis = array();
 	protected static $filters = array();
 	
-	public static function register($aliases, $class, $priority=0){
+	public static function register($type, $aliases, $class, $priority=0){
 		if (!is_array($aliases)) $aliases = array($aliases);
 		
 		$destination = null;
-		if (is_subclass_of($class, 'AbstractCocoUI')) $destination = &CocoDictionary::$uis;
-		else if (is_subclass_of($class, 'AbstractCocoFilter')) $destination = &CocoDictionary::$filters;
+		switch ($type){
+			case 'ui':
+			default:
+				$destination = &CocoDictionary::$uis;
+				break;
+		}
 		
 		foreach ($aliases as $alias){
 			if (!array_key_exists($alias, $destination)) $destination[$alias] = array();
@@ -29,7 +33,11 @@ class CocoDictionary{
 		}
 		
 		if (array_key_exists($alias, $lookup)){
-			return $lookup[$alias][count($lookup[$alias])-1];
+			return $lookup[$alias][count($lookup[$alias])-1];//buggy, count may not be highest index
+		}
+		else{
+			//@TODO exeception
+			return false;
 		}
 	}
 }

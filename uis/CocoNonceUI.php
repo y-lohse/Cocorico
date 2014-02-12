@@ -6,4 +6,4 @@ class CocoNonceUI extends AbstractCocoUI{
 	}
 	
 }
-CocoDictionary::register('nonce', 'CocoNonceUI');
+//CocoDictionary::register('nonce', 'CocoNonceUI');
