@@ -24,7 +24,7 @@ class CocoUI{
 		$this->value = false;
 	}
 	
-	public function filter($filter, $params=array()){
+	public function filter($filter){
 		//on first run, load the posted value
 		if ($this->value === null){
 			$this->value = CocoStore::request($this->name);
@@ -32,8 +32,10 @@ class CocoUI{
 		
 		//run through the filters
 		if ($this->value !== false){//prevents the remaining filters to run, either if no value was found or purposely by a filter
+			$args = array_slice(func_get_args(), 1);
+			array_unshift($args, $this->value);
 			$filterFn = CocoDictionary::translate($filter, 'filter');
-			$this->value = call_user_func($filterFn, $this->value, $params);
+			$this->value = call_user_func_array($filterFn, $args);
 		}
 		
 		return $this;

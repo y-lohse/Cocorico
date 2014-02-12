@@ -1,7 +1,7 @@
 <?php
 //nonce
-function cocoricoNonceUI($name, $options=array()){
-	return wp_nonce_field($options['action'], $name, true, false);
+function cocoricoNonceUI($name, $action){
+	return wp_nonce_field($action, $name, true, false);
 }
 CocoDictionary::register('ui', 'nonce', 'cocoricoNonceUI');
 

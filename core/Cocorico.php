@@ -13,7 +13,7 @@ class Cocorico{
 	
 	public function nonce(){
 		$nonce_action = 'cocorico_nonce_validation';
-		$nonce = $this->field('nonce', 'coco_nonce', array('action'=>$nonce_action))->filter('nonce', array('action'=>$nonce_action));
+		$nonce = $this->field('nonce', 'coco_nonce', $nonce_action)->filter('nonce', $nonce_action);
 		$this->validated = (bool)$nonce->getValue();
 	}
 	
@@ -24,7 +24,6 @@ class Cocorico{
 		if (!$this->validated) $instance->preventFilters();
 		
 		$args = array_slice(func_get_args(), 2);
-		
 		array_push($this->stack, array( 'action'=>'render',
 										'instance'=>$instance, 
 										'args'=>$args));
