@@ -1,7 +1,5 @@
 <?php
-class AbstractCocoUI{
-	
-//	abstract public function render($params);
+class CocoUI{
 	
 	protected $renderFn;
 	protected $name;//html sense of name

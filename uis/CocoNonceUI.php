@@ -1,9 +1,5 @@
 <?php
-class CocoNonceUI extends AbstractCocoUI{
-	
-	public function render($params){
-		return wp_nonce_field($params['action'], $this->name, true, false);
-	}
-	
+function cocoricoNonceUI($name, $params){
+	return wp_nonce_field($params['action'], $name, true, false);
 }
-//CocoDictionary::register('nonce', 'CocoNonceUI');
+CocoDictionary::register('ui', 'nonce', 'cocoricoNonceUI');

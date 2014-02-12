@@ -11,16 +11,8 @@ class Cocorico{
 	}
 	
 	public function field($ui, $name, $params=array()){
-//		if (class_exists($ui)) $class = $ui;
-//		else $class = CocoDictionary::translate($ui, 'ui');
-//			
-//		$instance = new $class($name);
-//		if (!$this->validated) $instance->preventFilters();
-//		array_push($this->uis, array($instance, $params));
-//		return $instance;
-	
 		$fn = CocoDictionary::translate($ui, 'ui');
-		$instance = new AbstractCocoUI($name, $fn);
+		$instance = new CocoUI($name, $fn);
 		//if (!$this->validated) $instance->preventFilters();
 		array_push($this->uis, array($instance, $params));
 		return $instance;

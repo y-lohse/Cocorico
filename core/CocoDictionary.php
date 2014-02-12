@@ -9,6 +9,9 @@ class CocoDictionary{
 		
 		$destination = null;
 		switch ($type){
+			case 'filter':
+				$destination = &CocoDictionary::$filters;
+				break;
 			case 'ui':
 			default:
 				$destination = &CocoDictionary::$uis;
