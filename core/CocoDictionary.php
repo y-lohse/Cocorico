@@ -4,7 +4,7 @@ class CocoDictionary{
 	protected static $uis = array();
 	protected static $filters = array();
 	
-	public static function register($type, $aliases, $class, $priority=0){
+	public static function register($type='ui', $aliases, $fn, $priority=0){
 		if (!is_array($aliases)) $aliases = array($aliases);
 		
 		$destination = null;
@@ -20,7 +20,7 @@ class CocoDictionary{
 		
 		foreach ($aliases as $alias){
 			if (!array_key_exists($alias, $destination)) $destination[$alias] = array();
-			$destination[$alias][$priority] = $class;
+			$destination[$alias][$priority] = $fn;
 		}
 	}
 	
