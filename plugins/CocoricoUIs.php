@@ -5,6 +5,15 @@ function cocoricoNonceUI($name, $params){
 }
 CocoDictionary::register('ui', 'nonce', 'cocoricoNonceUI');
 
+//submit button
+function cocoricoSubmitUI($name, $params){
+	$output = '<input type="submit" name="'.$name.'"';
+	if (isset($params['value'])) $output .= ' value="'.$params['value'].'"';
+	$output .= ' />';
+	return $output;
+}
+CocoDictionary::register('ui', 'submit', 'cocoricoSubmitUI');
+
 //text input
 function cocoricoTextUI($name, $params){
 	//saved is the key to a wordpress option containing the value
