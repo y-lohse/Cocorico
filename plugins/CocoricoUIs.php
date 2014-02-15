@@ -14,6 +14,13 @@ function cocoricoSubmitUI($name, $options=array()){
 }
 CocoDictionary::register('ui', 'submit', 'cocoricoSubmitUI');
 
+//label
+function cocoricoLabelUI($label, $for){
+	$output = '<label for="'.$for.'">'.$label.'</label>';
+	return $output;
+}
+CocoDictionary::register('ui', 'label', 'cocoricoLabelUI');
+
 //text input
 function cocoricoTextUI($name, $options=array()){
 	//saved is the key to a wordpress option containing the value
@@ -21,7 +28,7 @@ function cocoricoTextUI($name, $options=array()){
 	$option_key = (isset($options['saved'])) ? $options['saved'] : $name;
 	$value = (isset($options['value'])) ? $options['value'] : get_option($option_key);
 	
-	$output = '<input type="text" name="'.$name.'" value="'.$value.'" />';
+	$output = '<input type="text" name="'.$name.'" id="'.$name.'" value="'.$value.'" />';
 	return $output;
 }
 CocoDictionary::register('ui', 'text', 'cocoricoTextUI');
