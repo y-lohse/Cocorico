@@ -1,7 +1,7 @@
 <?php
 //save to wordpress options
 function cocoricoSaveFilter($value, $name){
-	update_option($name, $value);
+	update_option($name, stripslashes($value));
 	return $value;
 }
 CocoDictionary::register('filter', 'save', 'cocoricoSaveFilter');
