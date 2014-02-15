@@ -44,3 +44,14 @@ function cocoricoSettingShorthand($cocorico, $params){
 	$cocorico->endWrapper('tr');
 }
 CocoDictionary::register('shorthand', 'setting', 'cocoricoSettingShorthand');
+
+function cocoricoGroupHeader($cocorico, $tabNames){
+	$cocorico->startWrapper('group-header');
+	
+	foreach ($tabNames as $tab){
+		$cocorico->field('link', '#', $tab, array('class'=>'nav-tab'));
+	}
+	
+	$cocorico->endWrapper('group-header');
+}
+CocoDictionary::register('shorthand', 'groupHeader', 'cocoricoGroupHeader');
