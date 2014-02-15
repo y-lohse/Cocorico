@@ -4,6 +4,7 @@ class CocoDictionary{
 	protected static $uis = array();
 	protected static $filters = array();
 	protected static $wrappers = array();
+	protected static $shorthands = array();
 	
 	public static function register($type='ui', $aliases, $fn, $priority=0){
 		if (!is_array($aliases)) $aliases = array($aliases);
@@ -15,6 +16,9 @@ class CocoDictionary{
 				break;
 			case 'filter':
 				$destination = &CocoDictionary::$filters;
+				break;
+			case 'shorthand':
+				$destination = &CocoDictionary::$shorthands;
 				break;
 			case 'ui':
 			default:
@@ -35,6 +39,9 @@ class CocoDictionary{
 				break;
 			case 'filter':
 				$lookup = CocoDictionary::$filters;
+				break;
+			case 'shorthand':
+				$lookup = &CocoDictionary::$shorthands;
 				break;
 			case 'ui':
 			default:

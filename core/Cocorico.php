@@ -32,12 +32,20 @@ class Cocorico{
 	}
 	
 	public function startWrapper($name){
+		//nameparam is just there for clarity
 		array_push($this->stack, array('action'=>'startBuffer'));
 	}
 	
 	public function endWrapper($name){
 		array_push($this->stack, array( 'action'=>'endBuffer',
 										'wrapper'=>$name));
+	}
+	
+	public function shorthand($alias){
+		$fn = CocoDictionary::translate($alias, 'shorthand');
+		$args = array_slice(func_get_args(), 1);
+		array_unshift($args, $this);
+		call_user_func_array($fn, $args);
 	}
 	
 	public function render(){
