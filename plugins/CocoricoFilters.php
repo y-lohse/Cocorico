@@ -1,10 +1,16 @@
 <?php
 //save to wordpress options
 function cocoricoSaveFilter($value, $name){
-	update_option($name, stripslashes($value));
+	update_option($name, $value);
 	return $value;
 }
 CocoDictionary::register('filter', 'save', 'cocoricoSaveFilter');
+
+//strips backslahes
+function cocoricoStripSlashFilter($value){
+	return stripslashes($value);
+}
+CocoDictionary::register('filter', 'stripslashes', 'cocoricoStripSlashFilter');
 
 //nonce validation
 function cocoricoNonceFilter($value, $action){

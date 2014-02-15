@@ -26,16 +26,19 @@ function cocoricoSettingShorthand($cocorico, $params){
 	
 	$cocorico->startWrapper('td');
 	
+	$ui = null;
 	switch ($params['type']){
 		case 'radio':
 			if (!isset($params['options'])) $params['options'] = array();
-			$cocorico->field('radio', $params['name'], $params['radios'], $params['options'])->filter('save', $params['name']);
+			$ui = $cocorico->field('radio', $params['name'], $params['radios'], $params['options']);
 			break;
 		default:
 			if (!isset($params['options'])) $params['options'] = array();
-			$cocorico->field('input', $params['name'], $params['type'], $params['options'])->filter('save', $params['name']);
+			$ui = $cocorico->field('input', $params['name'], $params['type'], $params['options']);
 			break;
 	}
+	$ui->filter('stripslashes')->filter('save', $params['name']);
+	
 	$cocorico->endWrapper('td');
 	
 	$cocorico->endWrapper('tr');
