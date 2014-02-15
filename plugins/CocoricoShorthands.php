@@ -12,7 +12,7 @@ function cocoricoFormTableEndShorthand($cocorico){
 CocoDictionary::register('shorthand', 'endForm', 'cocoricoFormTableEndShorthand');
 
 //input field in a table
-function cocoricoSettingShorthand($cocorico, $params){
+function cocoricoInputShorthand($cocorico, $params){
 	$cocorico->startWrapper('tr');
 	
 	$cocorico->startWrapper('th');
@@ -20,9 +20,9 @@ function cocoricoSettingShorthand($cocorico, $params){
 	$cocorico->endWrapper('th');
 	
 	$cocorico->startWrapper('td');
-	$cocorico->field($params['type'], $params['name'])->filter('save', $params['name']);
+	$cocorico->field('input', $params['name'], $params['type'])->filter('save', $params['name']);
 	$cocorico->endWrapper('td');
 	
 	$cocorico->endWrapper('tr');
 }
-CocoDictionary::register('shorthand', 'setting', 'cocoricoSettingShorthand');
+CocoDictionary::register('shorthand', 'input', 'cocoricoInputShorthand');

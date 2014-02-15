@@ -36,8 +36,9 @@ function cocoricoLabelUI($label, $for){
 CocoDictionary::register('ui', 'label', 'cocoricoLabelUI');
 
 //text input
-function cocoricoTextUI($name, $options=array()){
+function cocoricoInputUI($name, $type='text', $options=array()){
 	$options = array_merge(array(
+		'class'=>array(),
 	), $options);
 	
 	//saved is the key to a wordpress option containing the value
@@ -46,7 +47,7 @@ function cocoricoTextUI($name, $options=array()){
 	$value = (isset($options['value'])) ? $options['value'] : get_option($option_key);
 	
 	$attrs = array(
-		'type'=>'text',
+		'type'=>$type,
 		'name'=>$name,
 		'id'=>$name,
 		'value'=>$value
@@ -61,7 +62,7 @@ function cocoricoTextUI($name, $options=array()){
 	
 	return $output;
 }
-CocoDictionary::register('ui', 'text', 'cocoricoTextUI');
+CocoDictionary::register('ui', 'input', 'cocoricoInputUI');
 
 //radio button set
 function cocoricoRadioUI($name, $radios, $options=array()){
