@@ -12,17 +12,32 @@ function cocoricoFormTableEndShorthand($cocorico){
 CocoDictionary::register('shorthand', 'endForm', 'cocoricoFormTableEndShorthand');
 
 //input field in a table
-function cocoricoInputShorthand($cocorico, $params){
+function cocoricoSettingShorthand($cocorico, $params){
 	$cocorico->startWrapper('tr');
 	
 	$cocorico->startWrapper('th');
-	$cocorico->field('label', $params['label'], $params['name']);
+	if (!in_array($params['type'], array('radio'))){
+		$cocorico->field('label', $params['label'], $params['name']);
+	}
+	else{
+		$cocorico->field('raw', $params['label']);
+	}
 	$cocorico->endWrapper('th');
 	
 	$cocorico->startWrapper('td');
-	$cocorico->field('input', $params['name'], $params['type'])->filter('save', $params['name']);
+	
+	switch ($params['type']){
+		case 'radio':
+			if (!isset($params['options'])) $params['options'] = array();
+			$cocorico->field('radio', $params['name'], $params['radios'], $params['options'])->filter('save', $params['name']);
+			break;
+		default:
+			if (!isset($params['options'])) $params['options'] = array();
+			$cocorico->field('input', $params['name'], $params['type'], $params['options'])->filter('save', $params['name']);
+			break;
+	}
 	$cocorico->endWrapper('td');
 	
 	$cocorico->endWrapper('tr');
 }
-CocoDictionary::register('shorthand', 'input', 'cocoricoInputShorthand');
+CocoDictionary::register('shorthand', 'setting', 'cocoricoSettingShorthand');
