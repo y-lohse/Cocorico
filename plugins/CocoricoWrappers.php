@@ -39,8 +39,10 @@ function cocoricoTableHeaderWrapper($content){
 }
 CocoDictionary::register('wrapper', 'th', 'cocoricoTableHeaderWrapper');
 
-
-//tr valign=top
-//<th scope="row"><label for="blogname">Titre du site</label></th>
-//<td><input name="blogname" id="blogname" value="Why Blog" class="regular-text" type="text"></td>
-//p.description
+function cocoricoGroupHeaderWrapper($content){
+	$output = '<h2 class="nav-tab-wrapper">';
+	$output .= $content;
+	$output .= '</h2>';
+	return $output;
+}
+CocoDictionary::register('wrapper', 'group-header', 'cocoricoGroupHeaderWrapper');
