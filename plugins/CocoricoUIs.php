@@ -1,4 +1,10 @@
 <?php
+//raw text
+function cocoricoRawUI($content){
+	return $content;
+}
+CocoDictionary::register('ui', 'raw', 'cocoricoRawUI');
+
 //nonce
 function cocoricoNonceUI($name, $action){
 	return wp_nonce_field($action, $name, true, false);
