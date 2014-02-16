@@ -23,19 +23,6 @@ function cocoricoLinkUI($href, $content, $options=array()){
 }
 CocoDictionary::register('ui', 'link', 'cocoricoLinkUI');
 
-//div
-function cocoricoDivUI($content, $attrs=array()){
-	$output = '<div';
-	
-	foreach ($attrs as $name=>$value){
-		$output .= ' '.$name.'="'.esc_attr($value).'"';
-	}
-	
-	$output .= '>'.$content.'</div>';
-	return $output;
-}
-CocoDictionary::register('ui', 'div', 'cocoricoDivUI');
-
 //nonce
 function cocoricoNonceUI($name, $action){
 	return wp_nonce_field($action, $name, true, false);
