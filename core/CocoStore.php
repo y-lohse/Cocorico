@@ -1,11 +1,30 @@
 <?php
-class CocoStore{
+interface CocoStore{
+
+	public function get($key);
+	public function set($key, $value);
 	
-	public static function get($key){
+}
+
+class CocoOptionStore implements CocoStore{
+	
+	public function get($key){
 		return get_option($key);
 	}
 	
-	public static function set($key, $value){
+	public function set($key, $value){
+		var_dump('setting '.$key);
+	}
+	
+}
+
+class CocoPostMetaStore implements CocoStore{
+	
+	public function get($key){
+		var_dump('get_postmeta');
+	}
+	
+	public function set($key, $value){
 		var_dump('setting '.$key);
 	}
 	

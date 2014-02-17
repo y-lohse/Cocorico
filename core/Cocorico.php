@@ -5,11 +5,14 @@ class Cocorico{
 	protected $validated = true;//default to true so that the nonce filter runs
 	protected $autoForm;
 	protected $wrapperArgsStack = array();
+	protected $store = null;
 	
 	public function __construct($autoForm=true, $autoNonce=true){
 		$this->autoForm = $autoForm;
+		$this->store = new CocoOptionStore();
 		if ($this->autoForm) $this->startWrapper('form');
 		if ($autoNonce) $this->nonce();
+		
 	}
 	
 	public function nonce(){
@@ -21,7 +24,7 @@ class Cocorico{
 	public function field($alias, $name){
 		$fn = CocoDictionary::translate($alias, 'ui');
 		
-		$instance = new CocoUI($name, $fn);
+		$instance = new CocoUI($name, $fn, $this->store);
 		if (!$this->validated) $instance->preventFilters();
 		
 		$args = array_slice(func_get_args(), 2);

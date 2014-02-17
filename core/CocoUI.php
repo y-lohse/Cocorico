@@ -5,12 +5,14 @@ class CocoUI{
 	
 	protected $renderFn;
 	protected $name;//html sense of name
+	protected $store;
 	protected $value = null;
 	protected $runFilters = true;
 	
-	public function __construct($name, $fn){
+	public function __construct($name, $renderFn, $store){
 		$this->name = $name;
-		$this->renderFn = $fn;
+		$this->renderFn = $renderFn;
+		$this->store = $store;
 		
 		//get the requested value for the filters
 		if ($this->value === null){
@@ -28,7 +30,7 @@ class CocoUI{
 	
 	public function render($args){
 		//get the stored value, because the filter ran by now
-		$this->value = CocoStore::get($this->name);
+		$this->value = $this->store->get($this->name);
 		array_unshift($args, $this);
 		return call_user_func_array($this->renderFn, $args);
 	}
