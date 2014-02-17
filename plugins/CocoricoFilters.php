@@ -18,6 +18,6 @@ function cocoricoNonceFilter($value, $action){
 	$result = wp_verify_nonce($value, $action);
 	
 	if ($result) return $value;
-	else return false;
+	else return CocoUI::STOP_FILTERS;
 }
 CocoDictionary::register('filter', 'nonce', 'cocoricoNonceFilter');

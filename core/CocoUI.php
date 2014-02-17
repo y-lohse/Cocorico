@@ -12,8 +12,9 @@ class CocoUI{
 		$this->name = $name;
 		$this->renderFn = $fn;
 		
+		//get the requested value for the filters
 		if ($this->value === null){
-			$this->value = CocoStore2::get($this->name);
+			$this->value = CocoRequest::request($this->name);
 		}
 	}
 	
@@ -26,6 +27,8 @@ class CocoUI{
 	}
 	
 	public function render($args){
+		//get the stored value, because the filter ran by now
+		$this->value = CocoStore::get($this->name);
 		array_unshift($args, $this);
 		return call_user_func_array($this->renderFn, $args);
 	}
