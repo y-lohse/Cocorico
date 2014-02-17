@@ -1,6 +1,8 @@
 <?php
 class CocoUI{
 	
+	const STOP_FILTERS = 'CocoUiStopFiltersConstant';
+	
 	protected $renderFn;
 	protected $name;//html sense of name
 	protected $value = null;
@@ -34,11 +36,14 @@ class CocoUI{
 	
 	public function filter($filter){
 		//run through the filters
-		if ($this->runFilters !== false){//prevents the remaining filters to run, either if no value was found or purposely by a filter
+		if ($this->runFilters !== false){
 			$args = array_slice(func_get_args(), 1);
 			array_unshift($args, $this->value);
 			$filterFn = CocoDictionary::translate($filter, 'filter');
-			$this->value = call_user_func_array($filterFn, $args);
+			$return = call_user_func_array($filterFn, $args);
+			
+			if ($return === CocoUI::STOP_FILTERS) $this->preventFilters();
+			else $this->value = $return;
 		}
 		
 		return $this;
