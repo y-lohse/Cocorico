@@ -4,34 +4,37 @@ class CocoUI{
 	protected $renderFn;
 	protected $name;//html sense of name
 	protected $value = null;
+	protected $runFilters = true;
 	
 	public function __construct($name, $fn){
 		$this->name = $name;
-		CocoStore::request($this->name);
 		$this->renderFn = $fn;
+		
+		if ($this->value === null){
+			$this->value = CocoStore2::get($this->name);
+		}
 	}
 	
-	public function render($args){
-		array_unshift($args, $this->name);
-		return call_user_func_array($this->renderFn, $args);
+	public function getName(){
+		return $this->name;
 	}
 	
 	public function getValue(){
 		return $this->value;
 	}
 	
+	public function render($args){
+		array_unshift($args, $this);
+		return call_user_func_array($this->renderFn, $args);
+	}
+	
 	public function preventFilters(){
-		$this->value = false;
+		$this->runFilters = false;
 	}
 	
 	public function filter($filter){
-		//on first run, load the posted value
-		if ($this->value === null){
-			$this->value = CocoStore::request($this->name);
-		}
-		
 		//run through the filters
-		if ($this->value !== false){//prevents the remaining filters to run, either if no value was found or purposely by a filter
+		if ($this->runFilters !== false){//prevents the remaining filters to run, either if no value was found or purposely by a filter
 			$args = array_slice(func_get_args(), 1);
 			array_unshift($args, $this->value);
 			$filterFn = CocoDictionary::translate($filter, 'filter');

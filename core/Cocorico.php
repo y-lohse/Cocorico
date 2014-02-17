@@ -44,7 +44,7 @@ class Cocorico{
 										'wrapper'=>$name));
 	}
 	
-	private function shorthand($alias){
+	protected function shorthand($alias){
 		$fn = CocoDictionary::translate($alias, 'shorthand');
 		$args = array_slice(func_get_args(), 1);
 		array_unshift($args, $this);

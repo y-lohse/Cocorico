@@ -1,43 +1,43 @@
 <?php
 //raw text
-function cocoricoRawUI($content){
-	return $content;
-}
-CocoDictionary::register('ui', 'raw', 'cocoricoRawUI');
-
-//link
-function cocoricoLinkUI($href, $content, $options=array()){
-	$output = '<a';
-	
-	$attrs = array(
-		'href'=>$href,
-	);
-	$attrs['class'] = (is_array($options['class'])) ? implode($options['class'], ' ') : $options['class'];
-	
-	foreach ($attrs as $name=>$value){
-		$output .= ' '.$name.'="'.esc_attr($value).'"';
-	}
-	
-	$output .= '>'.$content.'</a>';
-	return $output;
-}
-CocoDictionary::register('ui', 'link', 'cocoricoLinkUI');
+//function cocoricoRawUI($content){
+//	return $content;
+//}
+//CocoDictionary::register('ui', 'raw', 'cocoricoRawUI');
+//
+////link
+//function cocoricoLinkUI($href, $content, $options=array()){
+//	$output = '<a';
+//	
+//	$attrs = array(
+//		'href'=>$href,
+//	);
+//	$attrs['class'] = (is_array($options['class'])) ? implode($options['class'], ' ') : $options['class'];
+//	
+//	foreach ($attrs as $name=>$value){
+//		$output .= ' '.$name.'="'.esc_attr($value).'"';
+//	}
+//	
+//	$output .= '>'.$content.'</a>';
+//	return $output;
+//}
+//CocoDictionary::register('ui', 'link', 'cocoricoLinkUI');
 
 //nonce
-function cocoricoNonceUI($name, $action){
-	return wp_nonce_field($action, $name, true, false);
+function cocoricoNonceUI($ui, $action){
+	return wp_nonce_field($action, $ui->getName(), true, false);
 }
 CocoDictionary::register('ui', 'nonce', 'cocoricoNonceUI');
 
 //submit button
-function cocoricoSubmitUI($name, $options=array()){
+function cocoricoSubmitUI($ui, $options=array()){
 	$options = array_merge(array(
 		'class'=>array('button', 'button-primary')
 	), $options);
 	
 	$attrs = array(
 		'type'=>'submit',
-		'name'=>$name,
+		'name'=>$ui->getName(),
 	);
 	$attrs['class'] = (is_array($options['class'])) ? implode($options['class'], ' ') : $options['class'];
 	if (isset($options['value'])) $attrs['value'] = $options['value'];
@@ -53,27 +53,24 @@ function cocoricoSubmitUI($name, $options=array()){
 CocoDictionary::register('ui', 'submit', 'cocoricoSubmitUI');
 
 //label
-function cocoricoLabelUI($label, $for){
-	$output = '<label for="'.esc_attr($for).'">'.$label.'</label>';
+function cocoricoLabelUI($ui, $for){
+	$output = '<label for="'.esc_attr($for).'">'.$ui->getName().'</label>';
 	return $output;
 }
 CocoDictionary::register('ui', 'label', 'cocoricoLabelUI');
 
 //text input
-function cocoricoInputUI($name, $type='text', $options=array()){
+function cocoricoInputUI($ui, $type='text', $options=array()){
 	$options = array_merge(array(
 		'class'=>array(),
 	), $options);
 	
-	//saved is the key to a wordpress option containing the value
-	//value is the direct value to output
-	$option_key = (isset($options['saved'])) ? $options['saved'] : $name;
-	$value = (isset($options['value'])) ? $options['value'] : get_option($option_key);
+	$value = (isset($options['value'])) ? $options['value'] : $ui->getValue();
 	
 	$attrs = array(
 		'type'=>$type,
-		'name'=>$name,
-		'id'=>$name,
+		'name'=>$ui->getName(),
+		'id'=>$ui->getName(),
 		'value'=>$value
 	);
 	$attrs['class'] = (is_array($options['class'])) ? implode($options['class'], ' ') : $options['class'];
@@ -89,20 +86,20 @@ function cocoricoInputUI($name, $type='text', $options=array()){
 CocoDictionary::register('ui', 'input', 'cocoricoInputUI');
 
 //radio button set
-function cocoricoRadioUI($name, $radios, $options=array()){
+function cocoricoRadioUI($ui, $radios, $options=array()){
 	$options = array_merge(array(
 		'before'=>'',
 		'after'=>''
 	), $options);
 	
 	$output = '';
-	$selected = get_option($name);
+	$selected = $ui->getValue();
 
 	foreach ($radios as $label=>$value){
 		$output .= $options['before'];
 		$output .= '
 		<label>
-			<input type="radio" name="'.$name.'" value="'.$value.'" '.(($selected == $value) ? 'checked="checked"' : '').' />
+			<input type="radio" name="'.$ui->getName().'" value="'.$value.'" '.(($selected == $value) ? 'checked="checked"' : '').' />
 			'.$label.'
 		</label>
 		';
