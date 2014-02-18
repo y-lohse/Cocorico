@@ -1,27 +1,27 @@
 <?php
 //raw text
-//function cocoricoRawUI($content){
-//	return $content;
-//}
-//CocoDictionary::register('ui', 'raw', 'cocoricoRawUI');
-//
-////link
-//function cocoricoLinkUI($href, $content, $options=array()){
-//	$output = '<a';
-//	
-//	$attrs = array(
-//		'href'=>$href,
-//	);
-//	$attrs['class'] = (is_array($options['class'])) ? implode($options['class'], ' ') : $options['class'];
-//	
-//	foreach ($attrs as $name=>$value){
-//		$output .= ' '.$name.'="'.esc_attr($value).'"';
-//	}
-//	
-//	$output .= '>'.$content.'</a>';
-//	return $output;
-//}
-//CocoDictionary::register('ui', 'link', 'cocoricoLinkUI');
+function cocoricoRawUI($ui){
+	return $ui->getName();
+}
+CocoDictionary::register('ui', 'raw', 'cocoricoRawUI');
+
+//link
+function cocoricoLinkUI($ui, $href, $options=array()){
+	$output = '<a';
+	
+	$attrs = array(
+		'href'=>$href,
+	);
+	$attrs['class'] = (is_array($options['class'])) ? implode($options['class'], ' ') : $options['class'];
+	
+	foreach ($attrs as $name=>$value){
+		$output .= ' '.$name.'="'.esc_attr($value).'"';
+	}
+	
+	$output .= '>'.$ui->getName().'</a>';
+	return $output;
+}
+CocoDictionary::register('ui', 'link', 'cocoricoLinkUI');
 
 //nonce
 function cocoricoNonceUI($ui, $action){

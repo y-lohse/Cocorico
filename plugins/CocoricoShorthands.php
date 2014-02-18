@@ -49,7 +49,7 @@ function cocoricoGroupHeader($cocorico, $tabNames){
 	$cocorico->startWrapper('group-header');
 	
 	foreach ($tabNames as $tab){
-		$cocorico->field('link', '#', $tab, array('class'=>'nav-tab'));
+		$cocorico->field('link', $tab, '#', array('class'=>'nav-tab'));
 	}
 	
 	$cocorico->endWrapper('group-header');
