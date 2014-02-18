@@ -28,6 +28,10 @@ class CocoUI{
 		return $this->value;
 	}
 	
+	public function getStore(){
+		return $this->store;
+	}
+	
 	public function render($args){
 		//get the stored value, because the filter ran by now
 		$this->value = $this->store->get($this->name);
@@ -43,7 +47,7 @@ class CocoUI{
 		//run through the filters
 		if ($this->runFilters !== false){
 			$args = array_slice(func_get_args(), 1);
-			array_unshift($args, $this->value);
+			array_unshift($args, $this);
 			$filterFn = CocoDictionary::translate($filter, 'filter');
 			$return = call_user_func_array($filterFn, $args);
 			
