@@ -46,3 +46,11 @@ function cocoricoGroupHeaderWrapper($content){
 	return $output;
 }
 CocoDictionary::register('wrapper', 'group-header', 'cocoricoGroupHeaderWrapper');
+
+function cocoricoTabWrapper($content, $id){
+	$output = '<div class="cocorico-tab-wrapper" id="'.$id.'">';
+	$output .= $content;
+	$output .= '</div>';
+	return $output;
+}
+CocoDictionary::register('wrapper', 'tab', 'cocoricoTabWrapper');
