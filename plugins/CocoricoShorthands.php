@@ -39,6 +39,10 @@ function cocoricoSettingShorthand($cocorico, $params){
 	}
 	$ui->filter('stripslashes')->filter('save', $params['name']);
 	
+	if (isset($params['description'])){
+		$cocorico->field('description', $params['description']);
+	}
+	
 	$cocorico->endWrapper('td');
 	
 	$cocorico->endWrapper('tr');
@@ -49,7 +53,7 @@ function cocoricoGroupHeader($cocorico, $tabNames){
 	$cocorico->startWrapper('group-header');
 	
 	foreach ($tabNames as $tab){
-		$cocorico->field('link', $tab, '#', array('class'=>'nav-tab'));
+		$cocorico->field('link', $tab, '#'.$tab, array('class'=>'nav-tab'));
 	}
 	
 	$cocorico->endWrapper('group-header');

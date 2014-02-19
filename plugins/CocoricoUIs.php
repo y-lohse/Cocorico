@@ -109,3 +109,8 @@ function cocoricoRadioUI($ui, $radios, $options=array()){
 	return $output;
 }
 CocoDictionary::register('ui', 'radio', 'cocoricoRadioUI');
+
+function cocoricoDescriptionUI($ui){
+	return '<p class="description">'.$ui->getName().'</p>';
+}
+CocoDictionary::register('ui', 'description', 'cocoricoDescriptionUI');
