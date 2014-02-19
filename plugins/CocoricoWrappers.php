@@ -46,11 +46,3 @@ function cocoricoGroupHeaderWrapper($content){
 	return $output;
 }
 CocoDictionary::register('wrapper', 'group-header', 'cocoricoGroupHeaderWrapper');
-
-function cocoricoGroupWrapper($content, $id){
-	$output = '<div class="group postbox" id="'.esc_attr($id).'">';
-	$output .= $content;
-	$output .= '</div>';
-	return $output;
-}
-CocoDictionary::register('wrapper', 'group', 'cocoricoGroupWrapper');
