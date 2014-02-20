@@ -22,14 +22,14 @@ class Cocorico{
 	
 	public function nonce(){
 		$nonce_action = 'cocorico_nonce_validation';
-		$nonce = $this->field('nonce', 'coco_nonce', $nonce_action)->filter('nonce', $nonce_action);
+		$nonce = $this->component('nonce', 'coco_nonce', $nonce_action)->filter('nonce', $nonce_action);
 		$this->validated = (bool)$nonce->getValue();
 	}
 	
-	public function field($alias, $name){
+	public function component($alias, $name){
 		$fn = CocoDictionary::translate($alias, 'ui');
 		
-		$instance = new CocoUI($name, $fn, $this->store);
+		$instance = new CocoComponent($name, $fn, $this->store);
 		if (!$this->validated) $instance->preventFilters();
 		
 		$args = array_slice(func_get_args(), 2);

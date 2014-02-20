@@ -1,7 +1,7 @@
 <?php
-class CocoUI{
+class CocoComponent{
 	
-	const STOP_FILTERS = 'CocoUiStopFiltersConstant';
+	const STOP_FILTERS = 'CocoComponentStopFiltersConstant';
 	
 	protected $renderFn;
 	protected $name;//html sense of name
@@ -51,7 +51,7 @@ class CocoUI{
 			$filterFn = CocoDictionary::translate($filter, 'filter');
 			$return = call_user_func_array($filterFn, $args);
 			
-			if ($return === CocoUI::STOP_FILTERS) $this->preventFilters();
+			if ($return === CocoComponent::STOP_FILTERS) $this->preventFilters();
 			else $this->value = $return;
 		}
 		

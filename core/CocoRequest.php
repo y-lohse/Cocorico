@@ -39,7 +39,6 @@ class CocoRequest{
 	}
 	
 }
-//update_option('coco_lol', '');
 add_action('init', array('CocoRequest', 'restore'));
 add_action('save_post', array('CocoRequest', 'backup'));
 add_action('shutdown', array('CocoRequest', 'prepareBackup'));

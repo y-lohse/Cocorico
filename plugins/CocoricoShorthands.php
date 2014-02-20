@@ -17,10 +17,10 @@ function cocoricoSettingShorthand($cocorico, $params){
 	
 	$cocorico->startWrapper('th');
 	if (!in_array($params['type'], array('radio'))){
-		$cocorico->field('label', $params['label'], $params['name']);
+		$cocorico->component('label', $params['label'], $params['name']);
 	}
 	else{
-		$cocorico->field('raw', $params['label']);
+		$cocorico->component('raw', $params['label']);
 	}
 	$cocorico->endWrapper('th');
 	
@@ -30,17 +30,17 @@ function cocoricoSettingShorthand($cocorico, $params){
 	switch ($params['type']){
 		case 'radio':
 			if (!isset($params['options'])) $params['options'] = array();
-			$ui = $cocorico->field('radio', $params['name'], $params['radios'], $params['options']);
+			$ui = $cocorico->component('radio', $params['name'], $params['radios'], $params['options']);
 			break;
 		default:
 			if (!isset($params['options'])) $params['options'] = array();
-			$ui = $cocorico->field('input', $params['name'], $params['type'], $params['options']);
+			$ui = $cocorico->component('input', $params['name'], $params['type'], $params['options']);
 			break;
 	}
 	$ui->filter('stripslashes')->filter('save', $params['name']);
 	
 	if (isset($params['description'])){
-		$cocorico->field('description', $params['description']);
+		$cocorico->component('description', $params['description']);
 	}
 	
 	$cocorico->endWrapper('td');
@@ -53,7 +53,7 @@ function cocoricoGroupHeader($cocorico, $tabNames){
 	$cocorico->startWrapper('group-header');
 	
 	foreach ($tabNames as $tab){
-		$cocorico->field('link', $tab, '#'.$tab, array('class'=>'nav-tab'));
+		$cocorico->component('link', $tab, '#'.$tab, array('class'=>'nav-tab'));
 	}
 	
 	$cocorico->endWrapper('group-header');
