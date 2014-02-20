@@ -3,13 +3,13 @@
 function cocoricoFormTableStartShorthand($cocorico){
 	$cocorico->startWrapper('form-table');
 }
-CocoDictionary::register('shorthand', 'startForm', 'cocoricoFormTableStartShorthand');
+CocoDictionary::register(CocoDictionary::SHORTHAND, 'startForm', 'cocoricoFormTableStartShorthand');
 
 //ends a table form wrapper
 function cocoricoFormTableEndShorthand($cocorico){
 	$cocorico->endWrapper('form-table');
 }
-CocoDictionary::register('shorthand', 'endForm', 'cocoricoFormTableEndShorthand');
+CocoDictionary::register(CocoDictionary::SHORTHAND, 'endForm', 'cocoricoFormTableEndShorthand');
 
 //input field in a table
 function cocoricoSettingShorthand($cocorico, $params){
@@ -47,7 +47,7 @@ function cocoricoSettingShorthand($cocorico, $params){
 	
 	$cocorico->endWrapper('tr');
 }
-CocoDictionary::register('shorthand', 'setting', 'cocoricoSettingShorthand');
+CocoDictionary::register(CocoDictionary::SHORTHAND, 'setting', 'cocoricoSettingShorthand');
 
 function cocoricoGroupHeader($cocorico, $tabNames){
 	$cocorico->startWrapper('group-header');
@@ -58,4 +58,4 @@ function cocoricoGroupHeader($cocorico, $tabNames){
 	
 	$cocorico->endWrapper('group-header');
 }
-CocoDictionary::register('shorthand', 'groupHeader', 'cocoricoGroupHeader');
+CocoDictionary::register(CocoDictionary::SHORTHAND, 'groupHeader', 'cocoricoGroupHeader');

@@ -27,7 +27,7 @@ class Cocorico{
 	}
 	
 	public function component($alias, $name){
-		$fn = CocoDictionary::translate($alias, 'ui');
+		$fn = CocoDictionary::translate($alias, CocoDictionary::COMPONENT);
 		
 		$instance = new CocoComponent($name, $fn, $this->store);
 		if (!$this->validated) $instance->preventFilters();
@@ -53,7 +53,7 @@ class Cocorico{
 	}
 	
 	protected function shorthand($alias){
-		$fn = CocoDictionary::translate($alias, 'shorthand');
+		$fn = CocoDictionary::translate($alias, CocoDictionary::SHORTHAND);
 		$args = array_slice(func_get_args(), 1);
 		array_unshift($args, $this);
 		call_user_func_array($fn, $args);
@@ -81,7 +81,7 @@ class Cocorico{
 				
 				$args = array_pop($this->wrapperArgsStack);
 				array_unshift($args, $content);
-				$wrapperFn = CocoDictionary::translate($action['wrapper'], 'wrapper');
+				$wrapperFn = CocoDictionary::translate($action['wrapper'], CocoDictionary::WRAPPER);
 				echo call_user_func_array($wrapperFn, $args);
 			}
 		}

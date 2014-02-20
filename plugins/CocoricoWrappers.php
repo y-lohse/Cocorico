@@ -5,7 +5,7 @@ function cocoricoFormWrapper($content){
 	$output .= '</form>';
 	return $output;
 }
-CocoDictionary::register('wrapper', 'form', 'cocoricoFormWrapper');
+CocoDictionary::register(CocoDictionary::WRAPPER, 'form', 'cocoricoFormWrapper');
 
 function cocoricoFormTableWrapper($content){
 	$output = '<table class="form-table">';
@@ -13,7 +13,7 @@ function cocoricoFormTableWrapper($content){
 	$output .= '</table>';
 	return $output;
 }
-CocoDictionary::register('wrapper', 'form-table', 'cocoricoFormTableWrapper');
+CocoDictionary::register(CocoDictionary::WRAPPER, 'form-table', 'cocoricoFormTableWrapper');
 
 function cocoricoTableRowWrapper($content){
 	$output = '<tr valign="top">';
@@ -21,7 +21,7 @@ function cocoricoTableRowWrapper($content){
 	$output .= '</tr>';
 	return $output;
 }
-CocoDictionary::register('wrapper', 'tr', 'cocoricoTableRowWrapper');
+CocoDictionary::register(CocoDictionary::WRAPPER, 'tr', 'cocoricoTableRowWrapper');
 
 function cocoricoTableCellWrapper($content){
 	$output = '<td>';
@@ -29,7 +29,7 @@ function cocoricoTableCellWrapper($content){
 	$output .= '</td>';
 	return $output;
 }
-CocoDictionary::register('wrapper', 'td', 'cocoricoTableCellWrapper');
+CocoDictionary::register(CocoDictionary::WRAPPER, 'td', 'cocoricoTableCellWrapper');
 
 function cocoricoTableHeaderWrapper($content){
 	$output = '<th scope="row">';
@@ -37,7 +37,7 @@ function cocoricoTableHeaderWrapper($content){
 	$output .= '</th>';
 	return $output;
 }
-CocoDictionary::register('wrapper', 'th', 'cocoricoTableHeaderWrapper');
+CocoDictionary::register(CocoDictionary::WRAPPER, 'th', 'cocoricoTableHeaderWrapper');
 
 function cocoricoGroupHeaderWrapper($content){
 	$output = '<h2 class="nav-tab-wrapper">';
@@ -45,7 +45,7 @@ function cocoricoGroupHeaderWrapper($content){
 	$output .= '</h2>';
 	return $output;
 }
-CocoDictionary::register('wrapper', 'group-header', 'cocoricoGroupHeaderWrapper');
+CocoDictionary::register(CocoDictionary::WRAPPER, 'group-header', 'cocoricoGroupHeaderWrapper');
 
 function cocoricoTabWrapper($content, $id){
 	$output = '<div class="cocorico-tab-wrapper" id="'.$id.'">';
@@ -53,4 +53,4 @@ function cocoricoTabWrapper($content, $id){
 	$output .= '</div>';
 	return $output;
 }
-CocoDictionary::register('wrapper', 'tab', 'cocoricoTabWrapper');
+CocoDictionary::register(CocoDictionary::WRAPPER, 'tab', 'cocoricoTabWrapper');

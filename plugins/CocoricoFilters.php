@@ -5,13 +5,13 @@ function cocoricoSaveFilter($ui, $name){
 	$ui->getStore()->set($name, $value);
 	return $value;
 }
-CocoDictionary::register('filter', 'save', 'cocoricoSaveFilter');
+CocoDictionary::register(CocoDictionary::FILTER, 'save', 'cocoricoSaveFilter');
 
 //strips backslahes
 function cocoricoStripSlashFilter($ui){
 	return stripslashes($ui->getValue());
 }
-CocoDictionary::register('filter', 'stripslashes', 'cocoricoStripSlashFilter');
+CocoDictionary::register(CocoDictionary::FILTER, 'stripslashes', 'cocoricoStripSlashFilter');
 
 //nonce validation
 function cocoricoNonceFilter($ui, $action){
@@ -21,4 +21,4 @@ function cocoricoNonceFilter($ui, $action){
 	if ($result) return $value;
 	else return CocoComponent::STOP_FILTERS;
 }
-CocoDictionary::register('filter', 'nonce', 'cocoricoNonceFilter');
+CocoDictionary::register(CocoDictionary::FILTER, 'nonce', 'cocoricoNonceFilter');
