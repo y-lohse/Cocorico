@@ -5,6 +5,12 @@ function cocoricoRawComponent($ui){
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'raw', 'cocoricoRawComponent');
 
+//description
+function cocoricoDescriptionComponent($ui){
+	return '<p class="description">'.$ui->getName().'</p>';
+}
+CocoDictionary::register(CocoDictionary::COMPONENT, 'description', 'cocoricoDescriptionComponent');
+
 //link
 function cocoricoLinkComponent($ui, $href, $options=array()){
 	$output = '<a';
@@ -28,29 +34,6 @@ function cocoricoNonceComponent($ui, $action){
 	return wp_nonce_field($action, $ui->getName(), true, false);
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'nonce', 'cocoricoNonceComponent');
-
-//submit button
-function cocoricoSubmitComponent($ui, $options=array()){
-	$options = array_merge(array(
-		'class'=>array('button', 'button-primary')
-	), $options);
-	
-	$attrs = array(
-		'type'=>'submit',
-		'name'=>$ui->getName(),
-	);
-	$attrs['class'] = (is_array($options['class'])) ? implode($options['class'], ' ') : $options['class'];
-	if (isset($options['value'])) $attrs['value'] = $options['value'];
-	
-	$output = '<input';
-	foreach ($attrs as $name=>$value){
-		$output .= ' '.$name.'="'.esc_attr($value).'"';
-	}
-	$output .= ' />';
-	
-	return $output;
-}
-CocoDictionary::register(CocoDictionary::COMPONENT, 'submit', 'cocoricoSubmitComponent');
 
 //label
 function cocoricoLabelComponent($ui, $for){
@@ -85,6 +68,16 @@ function cocoricoInputComponent($ui, $type='text', $options=array()){
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'input', 'cocoricoInputComponent');
 
+//submit button
+function cocoricoSubmitComponent($ui, $options=array()){
+	$options = array_merge(array(
+		'class'=>array('button', 'button-primary'),
+		'value'=>'Save'
+	), $options);
+	return cocoricoInputComponent($ui, 'submit', $options);
+}
+CocoDictionary::register(CocoDictionary::COMPONENT, 'submit', 'cocoricoSubmitComponent');
+
 //radio button set
 function cocoricoRadioComponent($ui, $radios, $options=array()){
 	$options = array_merge(array(
@@ -109,8 +102,3 @@ function cocoricoRadioComponent($ui, $radios, $options=array()){
 	return $output;
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'radio', 'cocoricoRadioComponent');
-
-function cocoricoDescriptionComponent($ui){
-	return '<p class="description">'.$ui->getName().'</p>';
-}
-CocoDictionary::register(CocoDictionary::COMPONENT, 'description', 'cocoricoDescriptionComponent');
