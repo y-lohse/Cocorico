@@ -47,7 +47,8 @@ class CocoComponent{
 		//run through the filters
 		if ($this->runFilters !== false){
 			$args = array_slice(func_get_args(), 1);
-			array_unshift($args, $this);
+			array_unshift($args, $this->value);
+			array_push($args, $this);
 			$filterFn = CocoDictionary::translate($filter, 'filter');
 			$return = call_user_func_array($filterFn, $args);
 			
