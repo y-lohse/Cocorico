@@ -16,7 +16,7 @@ function cocoricoSettingShorthand($cocorico, $params){
 	$cocorico->startWrapper('tr');
 	
 	$cocorico->startWrapper('th');
-	if (!in_array($params['type'], array('radio'))){
+	if (!in_array($params['type'], array('radio', 'checkbox'))){
 		$cocorico->component('label', $params['label'], $params['name']);
 	}
 	else{
@@ -31,6 +31,10 @@ function cocoricoSettingShorthand($cocorico, $params){
 		case 'radio':
 			if (!isset($params['options'])) $params['options'] = array();
 			$ui = $cocorico->component('radio', $params['name'], $params['radios'], $params['options']);
+			break;
+		case 'checkbox':
+			if (!isset($params['options'])) $params['options'] = array();
+			$ui = $cocorico->component('checkbox', $params['name'], $params['checkboxes'], $params['options']);
 			break;
 		default:
 			if (!isset($params['options'])) $params['options'] = array();

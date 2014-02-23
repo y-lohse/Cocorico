@@ -102,3 +102,28 @@ function cocoricoRadioComponent($component, $radios, $options=array()){
 	return $output;
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'radio', 'cocoricoRadioComponent');
+
+//checkbox button set
+function cocoricoCheckboxComponent($component, $checkboxes, $options=array()){
+	$options = array_merge(array(
+		'before'=>'',
+		'after'=>''
+	), $options);
+	
+	$output = '';
+	$selected = $component->getValue();
+
+	foreach ($checkboxes as $label=>$value){
+		$output .= $options['before'];
+		$output .= '
+		<label>
+			<input type="checkbox" name="'.$component->getName().'[]" value="'.$value.'" '.((in_array($value, $selected)) ? 'checked="checked"' : '').' />
+			'.$label.'
+		</label>
+		';
+		$output .= $options['after'];
+	}
+
+	return $output;
+}
+CocoDictionary::register(CocoDictionary::COMPONENT, 'checkbox', 'cocoricoCheckboxComponent');

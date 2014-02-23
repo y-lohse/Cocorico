@@ -8,7 +8,16 @@ CocoDictionary::register(CocoDictionary::FILTER, 'save', 'cocoricoSaveFilter');
 
 //strips backslahes
 function cocoricoStripSlashFilter($value){
-	return stripslashes($value);
+	if (is_array($value)){
+		foreach ($value as &$val){
+			$val = stripslashes($val);
+		}
+	}
+	else{
+		$value = stripslashes($value);
+	}
+	
+	return $value;
 }
 CocoDictionary::register(CocoDictionary::FILTER, 'stripslashes', 'cocoricoStripSlashFilter');
 
