@@ -1,8 +1,6 @@
 <?php
 class CocoComponent{
 	
-	const STOP_FILTERS = 'CocoComponentStopFiltersConstant';
-	
 	protected $renderFn;
 	protected $name;//html sense of name
 	protected $store;
@@ -50,10 +48,7 @@ class CocoComponent{
 			array_unshift($args, $this->value);
 			array_push($args, $this);
 			$filterFn = CocoDictionary::translate($filter, 'filter');
-			$return = call_user_func_array($filterFn, $args);
-			
-			if ($return === CocoComponent::STOP_FILTERS) $this->preventFilters();
-			else $this->value = $return;
+			$this->value = call_user_func_array($filterFn, $args);
 		}
 		
 		return $this;

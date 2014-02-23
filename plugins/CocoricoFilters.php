@@ -13,10 +13,10 @@ function cocoricoStripSlashFilter($value){
 CocoDictionary::register(CocoDictionary::FILTER, 'stripslashes', 'cocoricoStripSlashFilter');
 
 //nonce validation
-function cocoricoNonceFilter($value, $action){
+function cocoricoNonceFilter($value, $action, $component){
 	$result = wp_verify_nonce($value, $action);
 	
-	if ($result) return $value;
-	else return CocoComponent::STOP_FILTERS;
+	if (!$result) $component->preventFilters();
+	return $value;
 }
 CocoDictionary::register(CocoDictionary::FILTER, 'nonce', 'cocoricoNonceFilter');
