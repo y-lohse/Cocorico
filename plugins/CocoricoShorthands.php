@@ -13,15 +13,21 @@ CocoDictionary::register(CocoDictionary::SHORTHAND, 'endForm', 'cocoricoFormTabl
 
 //input field in a table
 function cocoricoSettingShorthand($cocorico, $params){
+	$params = array_merge(array(
+		'labeless'=>false,
+	), $params);
+	
 	$cocorico->startWrapper('tr');
 	
 	$cocorico->startWrapper('th');
-	if (!in_array($params['type'], array('radio', 'checkbox'))){
-		$cocorico->component('label', $params['label'], $params['name']);
-	}
-	else{
+	
+	if (in_array($params['type'], array('radio', 'checkbox')) || $params['labeless']){
 		$cocorico->component('raw', $params['label']);
 	}
+	else{
+		$cocorico->component('label', $params['label'], $params['name']);
+	}
+	
 	$cocorico->endWrapper('th');
 	
 	$cocorico->startWrapper('td');
@@ -38,7 +44,7 @@ function cocoricoSettingShorthand($cocorico, $params){
 			break;
 		default:
 			if (!isset($params['options'])) $params['options'] = array();
-			$ui = $cocorico->component('input', $params['name'], $params['type'], $params['options']);
+			$ui = $cocorico->component($params['type'], $params['name'], $params['options']);
 			break;
 	}
 	$ui->filter('stripslashes')->filter('save', $params['name']);

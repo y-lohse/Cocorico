@@ -42,9 +42,10 @@ function cocoricoLabelComponent($component, $for){
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'label', 'cocoricoLabelComponent');
 
-//single input
-function cocoricoInputComponent($component, $type='text', $options=array()){
+//single general input
+function cocoricoInputComponent($component, $options=array()){
 	$options = array_merge(array(
+		'type'=>'text',
 		'class'=>array(),
 	), $options);
 	
@@ -53,7 +54,6 @@ function cocoricoInputComponent($component, $type='text', $options=array()){
 	
 	//core attributes
 	$attrs = array(
-		'type'=>$type,
 		'name'=>$component->getName(),
 		'id'=>$component->getName(),
 	);
@@ -83,13 +83,32 @@ function cocoricoInputComponent($component, $type='text', $options=array()){
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'input', 'cocoricoInputComponent');
 
+//text input
+function cocoricoTextComponent($component, $options=array()){
+	$options = array_merge(array(
+		'type'=>'text',
+	), $options);
+	return cocoricoInputComponent($component, $options);
+}
+CocoDictionary::register(CocoDictionary::COMPONENT, 'text', 'cocoricoTextComponent');
+
+//url input
+function cocoricoURLComponent($component, $options=array()){
+	$options = array_merge(array(
+		'type'=>'url',
+	), $options);
+	return cocoricoInputComponent($component, $options);
+}
+CocoDictionary::register(CocoDictionary::COMPONENT, 'url', 'cocoricoURLComponent');
+
 //submit button
 function cocoricoSubmitComponent($component, $options=array()){
 	$options = array_merge(array(
+		'type'=>'submit',
 		'class'=>array('button', 'button-primary'),
 		'default'=>'Save'
 	), $options);
-	return cocoricoInputComponent($component, 'submit', $options);
+	return cocoricoInputComponent($component, $options);
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'submit', 'cocoricoSubmitComponent');
 
@@ -146,9 +165,10 @@ CocoDictionary::register(CocoDictionary::COMPONENT, 'checkbox', 'cocoricoCheckbo
 //color picker
 function cocoricoColorComponent($component, $options=array()){
 	$options = array_merge(array(
+		'type'=>'text',
 		'class'=>array('cocorico-colorpicker'),
 		'default'=>'#333',
 	), $options);
-	return cocoricoInputComponent($component, 'text', $options);
+	return cocoricoInputComponent($component, $options);
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'color', 'cocoricoColorComponent');
