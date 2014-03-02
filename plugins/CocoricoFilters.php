@@ -1,6 +1,12 @@
 <?php
 //save to wordpress options
-function cocoricoSaveFilter($value, $name, $component){
+function cocoricoSaveFilter($value){//$name=null, $component
+	@list($name, $component) = array_slice(func_get_args(), 1);
+	if (!$component){
+		$component = $name;
+		$name = $component->getName();
+	}
+	
 	$component->getStore()->set($name, $value);
 	return $value;
 }
