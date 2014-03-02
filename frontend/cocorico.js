@@ -46,5 +46,8 @@
 				if (supportsLocalStorage) window.localStorage.setItem(activeTabStorageKey, hrefHash);
 			}
 		});
+		
+		//activate color pickers
+		$('.cocorico-colorpicker').wpColorPicker();
 	});
 })(jQuery, window);

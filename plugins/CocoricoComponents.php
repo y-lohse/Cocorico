@@ -42,21 +42,36 @@ function cocoricoLabelComponent($component, $for){
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'label', 'cocoricoLabelComponent');
 
-//text input
+//single input
 function cocoricoInputComponent($component, $type='text', $options=array()){
 	$options = array_merge(array(
 		'class'=>array(),
 	), $options);
 	
-	$value = (isset($options['value'])) ? $options['value'] : $component->getValue();
+	if ($component->getValue()) $value = $component->getValue();
+	else if (isset($options['default'])) $value = $options['default'];
 	
+	//core attributes
 	$attrs = array(
 		'type'=>$type,
 		'name'=>$component->getName(),
 		'id'=>$component->getName(),
-		'value'=>$value
 	);
-	$attrs['class'] = (is_array($options['class'])) ? implode($options['class'], ' ') : $options['class'];
+	if (isset($value)) $attrs['value'] = $value;
+	
+	//optionnal attributes
+	foreach ($options as $attr=>$value){
+		switch ($attr){
+			case 'class':
+				$attrs['class'] = (is_array($value)) ? implode($value, ' ') : $value;
+				break;
+			case 'default':
+				break;
+			default:
+				$attrs[$attr] = $value;
+				break;
+		}
+	}
 	
 	$output = '<input';
 	foreach ($attrs as $name=>$value){
@@ -72,7 +87,7 @@ CocoDictionary::register(CocoDictionary::COMPONENT, 'input', 'cocoricoInputCompo
 function cocoricoSubmitComponent($component, $options=array()){
 	$options = array_merge(array(
 		'class'=>array('button', 'button-primary'),
-		'value'=>'Save'
+		'default'=>'Save'
 	), $options);
 	return cocoricoInputComponent($component, 'submit', $options);
 }
@@ -127,3 +142,13 @@ function cocoricoCheckboxComponent($component, $checkboxes, $options=array()){
 	return $output;
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'checkbox', 'cocoricoCheckboxComponent');
+
+//color picker
+function cocoricoColorComponent($component, $options=array()){
+	$options = array_merge(array(
+		'class'=>array('cocorico-colorpicker'),
+		'default'=>'#333',
+	), $options);
+	return cocoricoInputComponent($component, 'text', $options);
+}
+CocoDictionary::register(CocoDictionary::COMPONENT, 'color', 'cocoricoColorComponent');

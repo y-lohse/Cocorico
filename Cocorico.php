@@ -24,6 +24,9 @@ if (!function_exists('cocorico_enqueue')){
 	function cocorico_enqueue(){
 		wp_register_script('cocorico', COCORICO_URI.'/frontend/cocorico.js', array('jquery'), '1', true);
 		wp_enqueue_script('cocorico');
+		
+		wp_enqueue_style('wp-color-picker');
+		wp_enqueue_script('wp-color-picker');
 	}
 }
 add_action('admin_enqueue_scripts', 'cocorico_enqueue');
