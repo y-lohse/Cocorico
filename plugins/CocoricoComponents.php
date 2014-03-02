@@ -146,7 +146,8 @@ function cocoricoCheckboxComponent($component, $checkboxes, $options=array()){
 	
 	$output = '';
 	$selected = $component->getValue();
-
+	if ($selected === false) $selected = array();
+	
 	foreach ($checkboxes as $label=>$value){
 		$output .= $options['before'];
 		$output .= '
