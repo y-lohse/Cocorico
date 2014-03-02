@@ -1,5 +1,6 @@
 <?php
 
+if (!defined('COCORICO_PREFIX')) define('COCORICO_PREFIX', '');
 define('COCORICO_PATH', dirname(__FILE__));
 
 //Cocorico is supposed to be dropped in a plugin or a theme-get the url either way
@@ -8,7 +9,7 @@ if (strpos(COCORICO_PATH, get_theme_root()) >= 0){
 	define('COCORICO_URI', get_theme_root_uri().str_replace('\\', '/', $rootlessPath));
 }
 else{
-	var_dump('implement plugin support');
+	var_dump('Plugins are not supported yet');
 	define('COCORICO_URI', '');
 }
 

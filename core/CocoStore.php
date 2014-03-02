@@ -1,6 +1,7 @@
 <?php
 interface CocoStoreInterface{
 
+ 	public function setPrefix($prefix); 
 	public function get($key);
 	public function set($key, $value);
 	
@@ -8,12 +9,18 @@ interface CocoStoreInterface{
 
 class CocoOptionStore implements CocoStoreInterface{
 	
+	private $prefix = '';
+	
+	public function setPrefix($prefix){
+		$this->prefix = $prefix;
+	}
+	
 	public function get($key){
-		return get_option($key);
+		return get_option($this->prefix.$key);
 	}
 	
 	public function set($key, $value){
-		return update_option($key, $value);
+		return update_option($this->prefix.$key, $value);
 	}
 	
 }
@@ -24,14 +31,20 @@ class CocoPostMetaStore implements CocoStoreInterface{
 	private static $isPostContext = false;
 	private static $postId = null;
 	
+	private $prefix = '';
+	
+	public function setPrefix($prefix){
+		$this->prefix = $prefix;
+	}
+	
 	public function get($key){
-		$return = get_post_meta(CocoPostMetaStore::$postId, $key);
+		$return = get_post_meta(CocoPostMetaStore::$postId, $this->prefix.$key);
 		if (count($return) === 1) return array_shift($return);
 		else return $return;
 	}
 	
 	public function set($key, $value){
-		update_post_meta(CocoPostMetaStore::$postId, $key, $value);
+		update_post_meta(CocoPostMetaStore::$postId, $this->prefix.$key, $value);
 	}
 	
 	public static function isPostContext(){
