@@ -173,3 +173,66 @@ function cocoricoColorComponent($component, $options=array()){
 	return cocoricoInputComponent($component, $options);
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'color', 'cocoricoColorComponent');
+
+function cocoricoUploadComponent($component, $options=array()){
+	$value = $component->getValue();
+	
+	$output = '';
+	$output .= '<input type="text" name="'.$component->getName().'" value="'.$value.'" class="cocorico-upload" />';
+	$output .= '<input type="button" class="button cocorico-upload-button" value="Selectionner" />';
+	
+	if ($value){
+		$matches = array();
+		preg_match('/\.[a-zA-Z]+$/', $value, $matches);
+		$extension = $matches[0];
+		$iconUrl = includes_url().'images/crystal/';
+
+		switch ($extension){
+			case '.jpg':
+			case '.png':
+			case '.jpeg':
+			case '.gif':
+			case '.ico':
+				$src = $value;
+				break;
+			case '.txt':
+			case '.md':
+				$src = $iconUrl.'text.png';
+				break;
+			case '.js':
+			case '.php':
+			case '.html':
+			case '.css':
+				$src = $iconUrl.'code.png';
+				break;
+			case '.zip':
+			case '.rar':
+			case '.7z':
+				$src = $iconUrl.'archive.png';
+				break;
+			default:
+				$src = $iconUrl.'default.png';
+				break;
+		}
+	}
+	else{
+		$src = '';
+	}
+	
+	$output .= '
+		<div class="cocorico-preview-wrapper attachment" style="float: none; '.(($value) ? '' : 'display: none;').'">		
+			<div class="attachment-preview" style="width: 150px; height: 150px; cursor: auto;">
+				<img src="'.$src.'" alt="'.$component->getName().'" class="cocorico-preview icon" style="max-width: 100%; max-height: 80%;">
+				
+				<div class="filename">
+					<div class="submitbox">
+						<a href="#" class="cocorico-remove submitdelete">Effacer</a>
+					</div>
+				</div>			
+			</div>
+		</div>
+	';
+	
+	return $output;
+}
+CocoDictionary::register(CocoDictionary::COMPONENT, 'upload', 'cocoricoUploadComponent');
