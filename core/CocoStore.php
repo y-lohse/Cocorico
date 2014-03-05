@@ -37,14 +37,21 @@ class CocoPostMetaStore implements CocoStoreInterface{
 		$this->prefix = $prefix;
 	}
 	
+	private function honorPrefix($key){
+		if (substr($key, 0, 1) === '_') $key = '_'.$this->prefix.substr($key, 1);
+		else $key = $this->prefix.$key;
+		
+		return $key;
+	}
+	
 	public function get($key){
-		$return = get_post_meta(CocoPostMetaStore::$postId, $this->prefix.$key);
+		$return = get_post_meta(CocoPostMetaStore::$postId, $this->honorPrefix($key));
 		if (count($return) === 1) return array_shift($return);
 		else return $return;
 	}
 	
 	public function set($key, $value){
-		update_post_meta(CocoPostMetaStore::$postId, $this->prefix.$key, $value);
+		update_post_meta(CocoPostMetaStore::$postId, $this->honorPrefix($key), $value);
 	}
 	
 	public static function isPostContext(){
