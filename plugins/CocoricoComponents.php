@@ -42,6 +42,12 @@ function cocoricoLabelComponent($component, $for){
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'label', 'cocoricoLabelComponent');
 
+//textarea
+function cocoricoTextareaComponent($component){
+	return '<textarea name="'.esc_attr($component->getName()).'">'.$component->getValue().'</textarea>';
+}
+CocoDictionary::register(CocoDictionary::COMPONENT, 'textarea', 'cocoricoTextareaComponent');
+
 //single general input
 function cocoricoInputComponent($component, $options=array()){
 	$options = array_merge(array(
@@ -122,7 +128,7 @@ function cocoricoRadioComponent($component, $radios, $options=array()){
 	$output = '';
 	$selected = $component->getValue();
 
-	foreach ($radios as $label=>$value){
+	foreach ($radios as $value=>$label){
 		$output .= $options['before'];
 		$output .= '
 		<label>
@@ -148,7 +154,7 @@ function cocoricoCheckboxComponent($component, $checkboxes, $options=array()){
 	$selected = $component->getValue();
 	if ($selected === false) $selected = array();
 	
-	foreach ($checkboxes as $label=>$value){
+	foreach ($checkboxes as $value=>$label){
 		$output .= $options['before'];
 		$output .= '
 		<label>
@@ -226,7 +232,7 @@ function cocoricoUploadComponent($component, $options=array()){
 				
 				<div class="filename">
 					<div class="submitbox">
-						<a href="#" class="cocorico-remove submitdelete">)'.__('Delete').'</a>
+						<a href="#" class="cocorico-remove submitdelete">'.__('Delete').'</a>
 					</div>
 				</div>			
 			</div>
