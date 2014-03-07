@@ -43,8 +43,33 @@ function cocoricoLabelComponent($component, $for){
 CocoDictionary::register(CocoDictionary::COMPONENT, 'label', 'cocoricoLabelComponent');
 
 //textarea
-function cocoricoTextareaComponent($component){
-	return '<textarea name="'.esc_attr($component->getName()).'">'.$component->getValue().'</textarea>';
+function cocoricoTextareaComponent($component, $options=array()){
+	$options = array_merge(array(
+		'class'=>array('widefat'),
+	), $options);
+	
+	$attrs = array(
+		'name'=>$component->getName(),
+		'id'=>$component->getName(),
+	);
+	foreach ($options as $attr=>$value){
+		switch ($attr){
+			case 'class':
+				$attrs['class'] = (is_array($value)) ? implode($value, ' ') : $value;
+				break;
+			default:
+				$attrs[$attr] = $value;
+				break;
+		}
+	}
+	
+	$output = '<textarea ';
+	foreach ($attrs as $name=>$value){
+		$output .= ' '.$name.'="'.esc_attr($value).'"';
+	}
+	$output .= '>'.$component->getValue().'</textarea>';
+	
+	return $output;
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'textarea', 'cocoricoTextareaComponent');
 
