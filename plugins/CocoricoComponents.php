@@ -226,7 +226,7 @@ function cocoricoUploadComponent($component, $options=array()){
 				
 				<div class="filename">
 					<div class="submitbox">
-						<a href="#" class="cocorico-remove submitdelete">Effacer</a>
+						<a href="#" class="cocorico-remove submitdelete">)'.__('Delete').'</a>
 					</div>
 				</div>			
 			</div>
