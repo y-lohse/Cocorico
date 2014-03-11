@@ -36,8 +36,8 @@ function cocoricoNonceComponent($component, $action){
 CocoDictionary::register(CocoDictionary::COMPONENT, 'nonce', 'cocoricoNonceComponent');
 
 //label
-function cocoricoLabelComponent($component, $for){
-	$output = '<label for="'.esc_attr($for).'">'.$component->getName().'</label>';
+function cocoricoLabelComponent($component, $label){
+	$output = '<label for="'.esc_attr($component->getName()).'">'.$label.'</label>';
 	return $output;
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'label', 'cocoricoLabelComponent');
