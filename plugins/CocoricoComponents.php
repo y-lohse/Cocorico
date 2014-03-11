@@ -207,9 +207,14 @@ CocoDictionary::register(CocoDictionary::COMPONENT, 'color', 'cocoricoColorCompo
 
 function cocoricoUploadComponent($component, $options=array()){
 	$value = $component->getValue();
+	$options = array_merge(array(
+		'type'=>'text',
+		'class'=>array('cocorico-upload')
+	), $options);
 	
 	$output = '';
-	$output .= '<input type="text" name="'.$component->getName().'" value="'.$value.'" class="cocorico-upload" />';
+//	$output .= '<input type="text" name="'.$component->getName().'" value="'.$value.'" class="cocorico-upload" />';
+	$output .= cocoricoInputComponent($component, $options);
 	$output .= '<input type="button" class="button cocorico-upload-button" value="Selectionner" />';
 	
 	if ($value){
