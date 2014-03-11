@@ -78,6 +78,7 @@ function cocoricoInputComponent($component, $options=array()){
 	$options = array_merge(array(
 		'type'=>'text',
 		'class'=>array(),
+		'id'=>$component->getName(),
 	), $options);
 	
 	if ($component->getValue()) $value = $component->getValue();
@@ -86,7 +87,6 @@ function cocoricoInputComponent($component, $options=array()){
 	//core attributes
 	$attrs = array(
 		'name'=>$component->getName(),
-		'id'=>$component->getName(),
 	);
 	if (isset($value)) $attrs['value'] = $value;
 	
@@ -213,7 +213,6 @@ function cocoricoUploadComponent($component, $options=array()){
 	), $options);
 	
 	$output = '';
-//	$output .= '<input type="text" name="'.$component->getName().'" value="'.$value.'" class="cocorico-upload" />';
 	$output .= cocoricoInputComponent($component, $options);
 	$output .= '<input type="button" class="button cocorico-upload-button" value="Selectionner" />';
 	
