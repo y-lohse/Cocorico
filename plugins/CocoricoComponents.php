@@ -87,6 +87,7 @@ function cocoricoInputComponent($component, $options=array()){
 	$options = array_merge(array(
 		'type'=>'text',
 		'class'=>array(),
+		'name'=>$component->getName(),
 		'id'=>$component->getName(),
 	), $options);
 	
@@ -94,9 +95,7 @@ function cocoricoInputComponent($component, $options=array()){
 	else if (isset($options['default'])) $value = $options['default'];
 	
 	//core attributes
-	$attrs = array(
-		'name'=>$component->getName(),
-	);
+	$attrs = array();
 	if (isset($value)) $attrs['value'] = $value;
 	
 	//optionnal attributes
