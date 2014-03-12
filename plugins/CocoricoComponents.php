@@ -215,7 +215,7 @@ function cocoricoColorComponent($component, $options=array()){
 CocoDictionary::register(CocoDictionary::COMPONENT, 'color', 'cocoricoColorComponent');
 
 function cocoricoUploadComponent($component, $options=array()){
-	$value = $component->getValue();
+	$value = (isset($options['value'])) ? $options['value'] : $component->getValue();
 	$options = array_merge(array(
 		'type'=>'text',
 		'class'=>array('cocorico-upload')
