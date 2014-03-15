@@ -236,7 +236,7 @@ function cocoricoUploadComponent($component, $options=array()){
 	
 	$output = '';
 	$output .= cocoricoInputComponent($component, $options);
-	$output .= '<input type="button" class="button cocorico-upload-button" value="Selectionner" />';
+	$output .= '<input type="button" class="button cocorico-upload-button" value="'.__('Select').'" />';
 	
 	if ($value){
 		$matches = array();
