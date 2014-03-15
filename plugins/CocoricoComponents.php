@@ -140,6 +140,20 @@ function cocoricoURLComponent($component, $options=array()){
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'url', 'cocoricoURLComponent');
 
+//boolean input
+function cocoricoBooleanComponent($component, $options=array()){
+	$name = $component->getName();
+	$value = ($component->getValue() === false && isset($options['default'])) ? $options['default'] : $component->getValue();
+	
+	$output = '';
+	
+	$output .= '<input type="hidden" name="'.$name.'" value="0" />';
+	$output .= '<input type="checkbox" name="'.$name.'" id="'.$name.'" value="1" '.(($value) ? 'checked="checked"' : '').' />';
+	
+	return $output;
+}
+CocoDictionary::register(CocoDictionary::COMPONENT, 'boolean', 'cocoricoBooleanComponent');
+
 //submit button
 function cocoricoSubmitComponent($component, $options=array()){
 	$options = array_merge(array(
