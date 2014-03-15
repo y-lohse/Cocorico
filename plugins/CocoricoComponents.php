@@ -159,7 +159,7 @@ function cocoricoRadioComponent($component, $radios, $options=array()){
 	), $options);
 	
 	$output = '';
-	$selected = $component->getValue();
+	$selected = (!$component->getValue() && isset($options['default'])) ? $options['default'] : $component->getValue();
 
 	foreach ($radios as $value=>$label){
 		$output .= $options['before'];
@@ -184,7 +184,7 @@ function cocoricoCheckboxComponent($component, $checkboxes, $options=array()){
 	), $options);
 	
 	$output = '';
-	$selected = $component->getValue();
+	$selected = (!$component->getValue() && isset($options['default'])) ? $options['default'] : $component->getValue();
 	if (!$selected) $selected = array();
 	
 	foreach ($checkboxes as $value=>$label){
