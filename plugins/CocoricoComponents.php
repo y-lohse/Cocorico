@@ -140,6 +140,24 @@ function cocoricoURLComponent($component, $options=array()){
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'url', 'cocoricoURLComponent');
 
+//email input
+function cocoricoNumberComponent($component, $options=array()){
+	$options = array_merge(array(
+		'type'=>'number',
+	), $options);
+	return cocoricoInputComponent($component, $options);
+}
+CocoDictionary::register(CocoDictionary::COMPONENT, 'number', 'cocoricoNumberComponent');
+
+//number input
+function cocoricoEmailComponent($component, $options=array()){
+	$options = array_merge(array(
+		'type'=>'email',
+	), $options);
+	return cocoricoInputComponent($component, $options);
+}
+CocoDictionary::register(CocoDictionary::COMPONENT, 'email', 'cocoricoEmailComponent');
+
 //boolean input
 function cocoricoBooleanComponent($component, $options=array()){
 	$name = $component->getName();
