@@ -11,6 +11,10 @@ class Cocorico{
 		$this->autoForm = $autoForm;
 		
 		if ($useStore === 'auto') $storeClass = (CocoPostMetaStore::isPostContext()) ? 'CocoPostMetaStore' : 'CocoOptionStore';
+		else if ($useStore === 'widget'){
+			$storeClass = 'CocoWidgetStore';
+			register_widget('CocoWidgetStore');
+		}
 		else $storeClass = $useStore;
 		//@TODO : check if custom store implements store interface
 		$this->store = new $storeClass();
@@ -18,7 +22,6 @@ class Cocorico{
 		
 		if ($this->autoForm) $this->startWrapper('form');
 		if ($autoNonce) $this->nonce();
-		
 	}
 	
 	public function getStore(){
