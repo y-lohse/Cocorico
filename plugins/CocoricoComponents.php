@@ -39,8 +39,8 @@ function cocoricoLinkComponent($component, $content, $options=array()){
 CocoDictionary::register(CocoDictionary::COMPONENT, 'link', 'cocoricoLinkComponent');
 
 //nonce
-function cocoricoNonceComponent($component, $action){
-	return wp_nonce_field($action, $component->getName(), true, false);
+function cocoricoNonceComponent($component, $action, $referer = true){
+	return wp_nonce_field($action, $component->getName(), $referer, false);
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'nonce', 'cocoricoNonceComponent');
 
