@@ -177,7 +177,7 @@ function cocoricoSubmitComponent($component, $options=array()){
 	$options = array_merge(array(
 		'type'=>'submit',
 		'class'=>array('button', 'button-primary'),
-		'default'=>'Save'
+		'default'=>__('Save all changes')
 	), $options);
 	return cocoricoInputComponent($component, $options);
 }
