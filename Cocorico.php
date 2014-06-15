@@ -1,41 +1,42 @@
 <?php
 
-if (!defined('COCORICO_PREFIX')) define('COCORICO_PREFIX', '');
-define('COCORICO_PATH', dirname(__FILE__));
+if (!defined('COCORICO_PATH')){
+	if (!defined('COCORICO_PREFIX')) define('COCORICO_PREFIX', '');
+	define('COCORICO_PATH', dirname(__FILE__));
 
-//Cocorico is supposed to be dropped in a plugin or a theme-get the url either way
-if (strpos(COCORICO_PATH, get_theme_root()) >= 0){
-	$rootlessPath = substr(COCORICO_PATH, strlen(get_theme_root()));
-	define('COCORICO_URI', get_theme_root_uri().str_replace('\\', '/', $rootlessPath));
-}
-else{
-	var_dump('Plugins are not supported yet');
-	define('COCORICO_URI', '');
-}
-
-
-//autoload everything
-foreach (array('core', 'plugins') as $dir){
-	foreach (glob(COCORICO_PATH.'/'.$dir.'/*.php') as $file){
-		require_once $file;
+	//Cocorico is supposed to be dropped in a plugin or a theme-get the url either way
+	if (strpos(COCORICO_PATH, get_theme_root()) >= 0){
+		$rootlessPath = substr(COCORICO_PATH, strlen(get_theme_root()));
+		define('COCORICO_URI', get_theme_root_uri().str_replace('\\', '/', $rootlessPath));
 	}
-}
-
-foreach (glob(COCORICO_PATH.'/extensions/*', GLOB_ONLYDIR) as $extension){
-	foreach (glob($extension.'/*.php') as $file){
-		require_once $file;
+	else{
+		$url = plugin_dir_url(__FILE__);
+		define('COCORICO_URI', substr($url, 0, strlen($url)-1));
 	}
-}
 
-if (!function_exists('cocorico_enqueue')){
-	function cocorico_enqueue(){
-		wp_register_script('cocorico', COCORICO_URI.'/frontend/cocorico.js', array('jquery'), '1', true);
-		wp_enqueue_script('cocorico');
-		
-		wp_enqueue_style('wp-color-picker');
-		wp_enqueue_script('wp-color-picker');
-		
-		wp_enqueue_media();
+	//autoload everything
+	foreach (array('core', 'plugins') as $dir){
+		foreach (glob(COCORICO_PATH.'/'.$dir.'/*.php') as $file){
+			require_once $file;
+		}
 	}
+
+	foreach (glob(COCORICO_PATH.'/extensions/*', GLOB_ONLYDIR) as $extension){
+		foreach (glob($extension.'/*.php') as $file){
+			require_once $file;
+		}
+	}
+
+	if (!function_exists('cocorico_enqueue')){
+		function cocorico_enqueue(){
+			wp_register_script('cocorico', COCORICO_URI.'/frontend/cocorico.js', array('jquery'), '1', true);
+			wp_enqueue_script('cocorico');
+
+			wp_enqueue_style('wp-color-picker');
+			wp_enqueue_script('wp-color-picker');
+
+			wp_enqueue_media();
+		}
+	}
+	add_action('admin_enqueue_scripts', 'cocorico_enqueue');
 }
-add_action('admin_enqueue_scripts', 'cocorico_enqueue');
