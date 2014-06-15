@@ -1,7 +1,6 @@
 <?php
 
 if (!defined('COCORICO_PATH')){
-	if (!defined('COCORICO_PREFIX')) define('COCORICO_PREFIX', '');
 	define('COCORICO_PATH', dirname(__FILE__));
 
 	//Cocorico is supposed to be dropped in a plugin or a theme-get the url either way
