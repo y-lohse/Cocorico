@@ -28,8 +28,6 @@ if (!defined('COCORICO_PATH')){
 			wp_enqueue_style('wp-color-picker');
 			wp_enqueue_script('wp-color-picker');
 			
-			do_action('cocorico_enqueue', $coco_path);
-			
 			wp_enqueue_media();
 		}
 	}
