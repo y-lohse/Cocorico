@@ -208,6 +208,29 @@ function cocoricoRadioComponent($component, $radios, $options=array()){
 }
 CocoDictionary::register(CocoDictionary::COMPONENT, 'radio', 'cocoricoRadioComponent');
 
+//select 
+function cocoricoSelectComponent($component, $selects, $options=array()){
+	$options = array_merge(array(
+		'before'=>'',
+		'after'=>''
+	), $options);
+		
+	$output = '<select name="'.$component->getName().'">';
+	$selected = (!$component->getValue() && isset($options['default'])) ? $options['default'] : $component->getValue();
+
+	foreach ($selects as $value=>$label){
+		$output .= $options['before'];
+		$output .= '
+			<option type="radio" value="'.$value.'" '.(($selected == $value) ? 'selected' : '').'>
+			'.$label.'</option>
+		';
+		$output .= $options['after'];
+	}
+
+	return $output;
+}
+CocoDictionary::register(CocoDictionary::COMPONENT, 'select', 'cocoricoSelectComponent');
+
 //checkbox button set
 function cocoricoCheckboxComponent($component, $checkboxes, $options=array()){
 	$options = array_merge(array(
